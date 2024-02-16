@@ -1,4 +1,4 @@
-package com.lppduy.blogapp;
+package com.lppduy.blog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

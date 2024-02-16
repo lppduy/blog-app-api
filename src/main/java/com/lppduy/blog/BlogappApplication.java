@@ -1,4 +1,4 @@
-package com.lppduy.blogapp;
+package com.lppduy.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
