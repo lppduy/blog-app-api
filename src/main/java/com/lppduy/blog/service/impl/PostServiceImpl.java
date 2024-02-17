@@ -1,6 +1,7 @@
 package com.lppduy.blog.service.impl;
 
 import com.lppduy.blog.dtos.PostDTO;
+import com.lppduy.blog.dtos.PostResponse;
 import com.lppduy.blog.entity.Post;
 import com.lppduy.blog.exception.ResourceNotFoundException;
 import com.lppduy.blog.repository.PostRepository;
@@ -35,12 +36,22 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPosts(int pageNo, int pageSize) {
+    public PostResponse getAllPosts(int pageNo, int pageSize) {
 
         Page<Post> posts = postRepository.findAll(PageRequest.of(pageNo, pageSize));
         List<Post> listOfPosts = posts.getContent();
 
-        return listOfPosts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+        List<PostDTO> content = listOfPosts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(content);
+        postResponse.setPageNo(posts.getNumber());
+        postResponse.setPageSize(posts.getSize());
+        postResponse.setTotalElements(posts.getTotalElements());
+        postResponse.setTotalPages(posts.getTotalPages());
+        postResponse.setLast(posts.isLast());
+
+        return postResponse;
     }
 
     @Override

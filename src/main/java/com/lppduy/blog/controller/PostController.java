@@ -1,6 +1,7 @@
 package com.lppduy.blog.controller;
 
 import com.lppduy.blog.dtos.PostDTO;
+import com.lppduy.blog.dtos.PostResponse;
 import com.lppduy.blog.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class PostController {
     }
 
     @GetMapping
-    ResponseEntity<List<PostDTO>> getAllPosts(
+    ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
     ) {
