@@ -5,8 +5,11 @@ import com.lppduy.blog.entity.Post;
 import com.lppduy.blog.exception.ResourceNotFoundException;
 import com.lppduy.blog.repository.PostRepository;
 import com.lppduy.blog.service.PostService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,11 +35,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPosts() {
+    public List<PostDTO> getAllPosts(int pageNo, int pageSize) {
 
-        List<Post> posts = postRepository.findAll();
+        Page<Post> posts = postRepository.findAll(PageRequest.of(pageNo, pageSize));
+        List<Post> listOfPosts = posts.getContent();
 
-        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+        return listOfPosts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
     }
 
     @Override
