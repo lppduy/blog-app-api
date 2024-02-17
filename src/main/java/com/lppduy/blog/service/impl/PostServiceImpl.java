@@ -8,6 +8,7 @@ import com.lppduy.blog.repository.PostRepository;
 import com.lppduy.blog.service.PostService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
@@ -36,9 +37,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponse getAllPosts(int pageNo, int pageSize) {
+    public PostResponse getAllPosts(int pageNo, int pageSize, String sortBy, String sortDir) {
 
-        Page<Post> posts = postRepository.findAll(PageRequest.of(pageNo, pageSize));
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortBy).ascending() :
+                Sort.by(sortBy).descending();
+
+        Page<Post> posts = postRepository.findAll(PageRequest.of(pageNo, pageSize, sort));
         List<Post> listOfPosts = posts.getContent();
 
         List<PostDTO> content = listOfPosts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());

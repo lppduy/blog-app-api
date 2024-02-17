@@ -3,6 +3,7 @@ package com.lppduy.blog.controller;
 import com.lppduy.blog.dtos.PostDTO;
 import com.lppduy.blog.dtos.PostResponse;
 import com.lppduy.blog.service.PostService;
+import com.lppduy.blog.utils.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +27,14 @@ public class PostController {
 
     @GetMapping
     ResponseEntity<PostResponse> getAllPosts(
-            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+            @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortby,
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
+
     ) {
 
-        return ResponseEntity.ok(postService.getAllPosts(pageNo,pageSize));
+        return ResponseEntity.ok(postService.getAllPosts(pageNo,pageSize,sortby,sortDir));
     }
 
     @GetMapping("/{id}")
