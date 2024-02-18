@@ -1,14 +1,15 @@
 package com.lppduy.blog.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data // = getters, setters, toString, ...
+//@Data // = getters, setters, toString, ... => use with ModelMapper can cause exception
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
