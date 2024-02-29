@@ -1,7 +1,7 @@
 package com.lppduy.blog.controller;
 
-import com.lppduy.blog.dtos.PostDTO;
-import com.lppduy.blog.dtos.PostResponse;
+import com.lppduy.blog.payload.PostDTO;
+import com.lppduy.blog.payload.PostResponse;
 import com.lppduy.blog.service.PostService;
 import com.lppduy.blog.utils.AppConstants;
 import jakarta.validation.Valid;
@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("${api.prefix}/posts")

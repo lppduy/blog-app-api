@@ -1,12 +1,13 @@
 package com.lppduy.blog.service.impl;
 
-import com.lppduy.blog.dtos.LoginDTO;
-import com.lppduy.blog.dtos.RegisterDTO;
+import com.lppduy.blog.payload.LoginDTO;
+import com.lppduy.blog.payload.RegisterDTO;
 import com.lppduy.blog.entity.Role;
 import com.lppduy.blog.entity.User;
 import com.lppduy.blog.exception.BlogAPIException;
 import com.lppduy.blog.repository.RoleRepository;
 import com.lppduy.blog.repository.UserRepository;
+import com.lppduy.blog.security.JwtTokenProvider;
 import com.lppduy.blog.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Override
     public String login(LoginDTO loginDTO) {
@@ -40,7 +42,9 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "User Logged-in successfully!";
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        return token;
     }
 
     @Override

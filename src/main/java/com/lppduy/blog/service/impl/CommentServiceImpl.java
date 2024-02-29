@@ -1,6 +1,6 @@
 package com.lppduy.blog.service.impl;
 
-import com.lppduy.blog.dtos.CommentDTO;
+import com.lppduy.blog.payload.CommentDTO;
 import com.lppduy.blog.entity.Comment;
 import com.lppduy.blog.entity.Post;
 import com.lppduy.blog.exception.BlogAPIException;

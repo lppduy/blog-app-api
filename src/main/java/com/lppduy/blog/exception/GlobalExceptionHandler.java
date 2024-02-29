@@ -1,8 +1,6 @@
 package com.lppduy.blog.exception;
 
-import com.lppduy.blog.dtos.ErrorDetails;
-import com.lppduy.blog.exception.BlogAPIException;
-import com.lppduy.blog.exception.ResourceNotFoundException;
+import com.lppduy.blog.payload.ErrorDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

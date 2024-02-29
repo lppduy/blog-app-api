@@ -1,6 +1,6 @@
 package com.lppduy.blog.service;
 
-import com.lppduy.blog.dtos.CommentDTO;
+import com.lppduy.blog.payload.CommentDTO;
 
 import java.util.List;
 

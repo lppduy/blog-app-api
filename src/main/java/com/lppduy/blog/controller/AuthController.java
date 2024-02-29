@@ -1,7 +1,8 @@
 package com.lppduy.blog.controller;
 
-import com.lppduy.blog.dtos.LoginDTO;
-import com.lppduy.blog.dtos.RegisterDTO;
+import com.lppduy.blog.payload.JWTAuthResponse;
+import com.lppduy.blog.payload.LoginDTO;
+import com.lppduy.blog.payload.RegisterDTO;
 import com.lppduy.blog.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,13 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping(value = {"/login","/signin"})
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-        String response = authService.login(loginDTO);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDTO loginDto){
+        String token = authService.login(loginDto);
+
+        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
     @PostMapping(value = {"/register","/signup"})
