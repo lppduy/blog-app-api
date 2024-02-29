@@ -1,4 +1,4 @@
-package com.lppduy.blog.dtos;
+package com.lppduy.blog.payload;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

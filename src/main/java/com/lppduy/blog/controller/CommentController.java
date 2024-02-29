@@ -1,6 +1,6 @@
 package com.lppduy.blog.controller;
 
-import com.lppduy.blog.dtos.CommentDTO;
+import com.lppduy.blog.payload.CommentDTO;
 import com.lppduy.blog.service.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

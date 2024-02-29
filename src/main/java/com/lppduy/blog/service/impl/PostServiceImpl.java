@@ -1,7 +1,7 @@
 package com.lppduy.blog.service.impl;
 
-import com.lppduy.blog.dtos.PostDTO;
-import com.lppduy.blog.dtos.PostResponse;
+import com.lppduy.blog.payload.PostDTO;
+import com.lppduy.blog.payload.PostResponse;
 import com.lppduy.blog.entity.Post;
 import com.lppduy.blog.exception.ResourceNotFoundException;
 import com.lppduy.blog.repository.PostRepository;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
