@@ -2,6 +2,8 @@ package com.lppduy.blog.config;
 
 import com.lppduy.blog.security.JwtAuthenticationEntryPoint;
 import com.lppduy.blog.security.JwtAuthenticationFilter;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,6 +24,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableMethodSecurity
+@SecurityScheme(
+        name = "Bear Authentication",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
@@ -53,6 +61,8 @@ public class SecurityConfig {
                         -> authorize
                         .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                         .requestMatchers( "/api/v1/auth/**").permitAll()
+                        .requestMatchers( "/swagger-ui/**").permitAll()
+                        .requestMatchers( "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
 
                 )
@@ -64,21 +74,4 @@ public class SecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//
-//        UserDetails duy = User.builder()
-//                .username("duy")
-//                .password(passwordEncoder().encode("duy"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(duy,admin);
-//    }
 }
